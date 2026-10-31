@@ -130,11 +130,37 @@ edusense/tracking.py     Anonymous sustained-presence tracker
 edusense/vision.py       Local webcam/video sampling
 edusense/audio.py        One-second audio activity features
 edusense/analytics.py    Timestamp alignment and session summaries
-edusense/recommendations.py
-edusense/storage.py      Local SQLite history
-edusense/reporting.py    In-memory PDF generation
-tests/                   Offline behavior tests
-docs/                    Privacy and demo notes
+edusense/recommendations.py  Rule-based teacher prompts
+edusense/local_ai.py         Optional loopback Ollama prompts
+edusense/storage.py          Local SQLite history
+edusense/reporting.py        In-memory PDF generation
+edusense/demo.py             Synthetic sample sessions
+public_demo/                 Optional synthetic Streamlit demo
+tests/                       Offline behavior tests
+docs/                        Privacy and demo notes
 ~~~
+
+## Alignment with the project brief
+
+| Brief area | Status in this repository |
+|---|---|
+| Video detection | Local webcam and uploaded-video sampling with OpenCV face boxes |
+| Sustained attendance | Anonymous, session-only face tracks with a presence threshold; not identity matching |
+| Audio analysis | Optional local one-second signal features; no speech transcription or speaker identification |
+| Multimodal analytics | Timestamp-aligned motion and audio heuristics; alignment is approximate and the combined index is not validated |
+| Teaching suggestions | Rule-based prompts, with optional Ollama prompts using aggregate numbers on loopback |
+| Session history and reports | Explicit local SQLite saves, capped history, CSV and PDF exports |
+| Hosted presentation | GitHub Pages demo uses generated scenarios only; real media analysis remains local |
+| Student identity, emotions, teacher profiles | Not implemented |
+
+## Recommended next work
+
+1. Test the tracker on a varied set of consented sample clips and record where it misses or duplicates tracks.
+2. Improve tracking and report uncertainty without treating anonymous tracks as verified attendance.
+3. Improve audio/video synchronization and compare separate signals before changing any heuristic.
+4. Add more end-to-end workflow checks for camera failures, malformed uploads, history deletion, and report exports.
+5. Keep the public demo synthetic unless a separate hosted media-processing design is reviewed and its data handling is explicit.
+
+This covers the main safe demonstration workflow, but it does not implement every idea in the original vision. Face identity matching, emotion or attention scoring, student profiles, and validated learning or engagement measurements remain out of scope for the current code.
 
 No license file is included. The repository is public for viewing; reuse rights remain subject to copyright unless a license is added.
